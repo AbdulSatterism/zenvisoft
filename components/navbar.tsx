@@ -3,86 +3,103 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { navLinks, navCta, siteConfig } from "@/data/content";
-import { MenuIcon, XIcon, ArrowRightIcon } from "@/components/icons";
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 transition-all">
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
+    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100">
+      <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-6 lg:px-12">
         {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-3 group">
+        <Link href="/" className="flex items-center">
           <Image
             src={siteConfig.logo}
             alt={siteConfig.name}
-            width={165}
-            height={42}
-            className="h-10 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]"
+            width={160}
+            height={40}
+            className="h-10 w-auto object-contain"
             priority
           />
         </Link>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-9">
-          {navLinks.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              className="text-[15px] font-medium text-gray-700 hover:text-brand transition-colors duration-200"
-            >
-              {link.label}
-            </Link>
-          ))}
+        {/* Center Navigation Links */}
+        <nav className="hidden md:flex items-center gap-9">
+          {navLinks.map((link) => {
+            const isActive =
+              link.href === "/"
+                ? pathname === "/"
+                : pathname?.startsWith(link.href);
+            return (
+              <Link
+                key={link.label}
+                href={link.href}
+                className={`text-[15px] font-medium transition-colors ${
+                  isActive
+                    ? "text-[#01163B] font-bold"
+                    : "text-gray-600 hover:text-[#01163B]"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </nav>
 
-        {/* Desktop Right CTA Button (Pill Button Matching Node 55:2215) */}
-        <div className="hidden lg:flex items-center">
+        {/* Right CTA Button (#01163B) */}
+        <div className="hidden md:flex items-center">
           <Link
             href={navCta.href}
-            className="inline-flex items-center gap-2 rounded-full bg-brand px-6 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-brand-light hover:shadow-md transition-all duration-200"
+            className="inline-flex items-center justify-center rounded-full bg-[#01163B] px-6 py-2.5 text-xs font-semibold text-white shadow-md shadow-[#01163B]/25 hover:bg-[#0a2a5e] hover:shadow-lg hover:shadow-[#01163B]/35 transition-all duration-200"
           >
-            <span>{navCta.label}</span>
-            <ArrowRightIcon className="w-4 h-4" />
+            {navCta.label}
           </Link>
         </div>
 
-        {/* Mobile Toggle Button */}
-        <div className="flex lg:hidden">
+        {/* Mobile Hamburger */}
+        <div className="flex md:hidden">
           <button
             type="button"
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="inline-flex items-center justify-center rounded-lg p-2 text-gray-700 hover:bg-gray-100 focus:outline-none"
-            aria-label="Toggle navigation menu"
+            className="p-2 text-gray-700 hover:bg-gray-100 rounded-lg"
+            aria-label="Toggle Menu"
           >
-            {mobileOpen ? <XIcon className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
+            {mobileOpen ? (
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
           </button>
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile Drawer */}
       {mobileOpen && (
-        <div className="lg:hidden border-t border-gray-100 bg-white px-6 py-6 shadow-xl animate-in slide-in-from-top-2 duration-200">
-          <nav className="flex flex-col gap-4">
+        <div className="md:hidden border-t border-gray-100 bg-white px-6 py-5 shadow-lg">
+          <nav className="flex flex-col gap-3">
             {navLinks.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
-                className="text-base font-medium text-gray-800 hover:text-brand transition-colors py-1"
+                className="py-2 text-[15px] font-medium text-gray-700 hover:text-[#01163B]"
                 onClick={() => setMobileOpen(false)}
               >
                 {link.label}
               </Link>
             ))}
-            <div className="pt-4 border-t border-gray-100">
+            <div className="pt-3 border-t border-gray-100">
               <Link
                 href={navCta.href}
-                className="flex items-center justify-center gap-2 w-full rounded-full bg-brand px-6 py-3 text-center text-sm font-semibold text-white shadow-sm hover:bg-brand-light transition-all"
+                className="inline-flex w-full items-center justify-center rounded-full bg-[#01163B] px-6 py-3 text-xs font-semibold text-white shadow-md hover:bg-[#0a2a5e] transition-all"
                 onClick={() => setMobileOpen(false)}
               >
-                <span>{navCta.label}</span>
-                <ArrowRightIcon className="w-4 h-4" />
+                {navCta.label}
               </Link>
             </div>
           </nav>

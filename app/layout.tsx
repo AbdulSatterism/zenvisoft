@@ -3,6 +3,7 @@ import { Geist } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import WhatsAppFloating from "@/components/whatsapp-floating";
 import { siteConfig } from "@/data/content";
 
 const geist = Geist({
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
+        <WhatsAppFloating />
       </body>
     </html>
   );

@@ -1,33 +1,31 @@
 import type { Metadata } from "next";
-import PortfolioSection from "@/components/sections/portfolio";
-import TestimonialsSection from "@/components/sections/testimonials";
-import CtaSection from "@/components/sections/cta";
+import ProjectsPreviewSection from "@/components/sections/projects-preview";
+import CtaBanner from "@/components/sections/cta-banner";
 
 export const metadata: Metadata = {
   title: "Projects & Case Studies",
-  description: "Browse Zenvisoft's featured software engineering and digital product case studies.",
+  description: "Discover our featured digital products, web applications, and mobile solutions.",
 };
 
 export default function ProjectsPage() {
   return (
     <>
-      <section className="bg-gradient-to-b from-brand to-brand-light py-20 lg:py-24 text-white text-center">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <span className="rounded-full bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider backdrop-blur-md">
-            Our Work
+      <section className="bg-white py-16 text-center border-b border-gray-100">
+        <div className="mx-auto max-w-7xl px-6 lg:px-12">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-[#01163B] bg-[#f0f4fa] px-4 py-1 text-xs font-semibold text-[#01163B] mb-4">
+            Portfolio
           </span>
-          <h1 className="mt-6 text-4xl font-extrabold tracking-tight sm:text-5xl">
-            Case Studies & Delivered Solutions
+          <h1 className="mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl text-[#01163B]">
+            Our Work Speaks Louder Than Words
           </h1>
-          <p className="mt-4 text-lg text-gray-300 max-w-2xl mx-auto">
-            Explore our track record of engineering scalable, high-performance web applications, mobile suites, and cloud systems.
+          <p className="mt-4 text-base text-gray-500 max-w-2xl mx-auto">
+            Explore the innovative digital products, intuitive UX systems, and custom SaaS platforms we&apos;ve crafted.
           </p>
         </div>
       </section>
 
-      <PortfolioSection />
-      <TestimonialsSection />
-      <CtaSection />
+      <ProjectsPreviewSection />
+      <CtaBanner />
     </>
   );
 }

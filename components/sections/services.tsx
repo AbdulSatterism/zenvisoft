@@ -1,77 +1,77 @@
 import Link from "next/link";
-import { services } from "@/data/content";
-import { ServiceIcon, ArrowRightIcon, CheckIcon } from "@/components/icons";
+import Image from "next/image";
+import { servicesData } from "@/data/content";
 
 export default function ServicesSection() {
   return (
-    <section className="py-20 lg:py-28 bg-white" id="services">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="mx-auto max-w-2xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full bg-brand/5 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-brand">
-            Our Capabilities
+    <section className="bg-white py-20 lg:py-28" id="services">
+      <div className="mx-auto max-w-7xl px-6 lg:px-12">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
+          {/* Left Column (Sticky) */}
+          <div className="lg:col-span-5 lg:sticky lg:top-28 lg:self-start">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-[#01163B] bg-[#f0f4fa] px-4 py-1 text-xs font-semibold text-[#01163B]">
+              {servicesData.badge}
+            </span>
+            <h2 className="mt-5 text-3xl font-extrabold tracking-tight text-[#01163B] sm:text-4xl lg:text-[42px] lg:leading-[1.18]">
+              {servicesData.heading}
+            </h2>
+            <p className="mt-5 text-base text-gray-500 leading-relaxed max-w-md">
+              {servicesData.description}
+            </p>
           </div>
-          <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-            Engineered for Precision, Scale & Performance
-          </h2>
-          <p className="mt-4 text-lg text-gray-600">
-            We provide full-lifecycle digital engineering services to help startups, scale-ups, and enterprises innovate rapidly.
-          </p>
-        </div>
 
-        {/* 6-Card Grid */}
-        <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((service) => (
-            <div
-              key={service.slug}
-              className="group relative flex flex-col justify-between rounded-2xl border border-gray-100 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-xl"
-            >
-              <div>
-                {/* Top Icon & Badge */}
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-surface text-brand transition-colors duration-200 group-hover:bg-brand group-hover:text-white">
-                    <ServiceIcon icon={service.icon} className="w-7 h-7" />
-                  </div>
-                  <span className="rounded-full bg-surface px-3 py-1 text-xs font-medium text-gray-600">
-                    {service.badge}
-                  </span>
+          {/* Right Column (Stack of 5 wide cards) */}
+          <div className="lg:col-span-7 flex flex-col gap-4">
+            {servicesData.items.map((item) => (
+              <div
+                key={item.id}
+                className="group flex flex-col sm:flex-row items-center gap-5 rounded-2xl bg-[#F8F8FC] border border-gray-100 p-4 transition-all duration-200 hover:border-[#01163B]/30 hover:shadow-md"
+              >
+                {/* Left Thumbnail */}
+                <div className="relative h-24 w-28 sm:h-28 sm:w-32 shrink-0 overflow-hidden rounded-xl bg-white shadow-sm">
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
                 </div>
 
-                {/* Title */}
-                <h3 className="text-xl font-bold text-gray-900 transition-colors group-hover:text-brand">
-                  {service.title}
-                </h3>
+                {/* Right Details */}
+                <div className="flex-1 w-full flex flex-col justify-between py-1">
+                  <div>
+                    <h3 className="text-base font-bold text-[#01163B] group-hover:text-[#1E56A0] transition-colors">
+                      {item.title}
+                    </h3>
+                    <p className="mt-1.5 text-xs text-gray-500 leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
 
-                {/* Description */}
-                <p className="mt-3 text-sm leading-6 text-gray-600">
-                  {service.description}
-                </p>
+                  {/* Bottom row: Tool tags & See details button */}
+                  <div className="mt-3.5 flex items-center justify-between border-t border-gray-200/50 pt-2.5">
+                    <div className="flex flex-wrap gap-1.5">
+                      {item.tools.map((tool) => (
+                        <span
+                          key={tool}
+                          className="rounded-md bg-white border border-gray-200/70 px-2 py-0.5 text-[10px] font-semibold text-gray-600"
+                        >
+                          {tool}
+                        </span>
+                      ))}
+                    </div>
 
-                {/* Key Deliverables */}
-                <ul className="mt-6 space-y-2 border-t border-gray-100 pt-5">
-                  {service.deliverables.map((item) => (
-                    <li key={item} className="flex items-center gap-2 text-xs font-medium text-gray-700">
-                      <div className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-green-100 text-green-600">
-                        <CheckIcon className="w-2.5 h-2.5" />
-                      </div>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
+                    <Link
+                      href="/contact"
+                      className="rounded-full bg-white border border-gray-200 px-3.5 py-1 text-[11px] font-semibold text-gray-700 hover:border-[#01163B] hover:text-[#01163B] transition-colors shrink-0 ml-2"
+                    >
+                      See details
+                    </Link>
+                  </div>
+                </div>
               </div>
-
-              {/* Action Link */}
-              <div className="mt-8 pt-4 border-t border-gray-50 flex items-center justify-between">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-brand group-hover:text-accent transition-colors"
-                >
-                  <span>Request Consultation</span>
-                  <ArrowRightIcon className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
