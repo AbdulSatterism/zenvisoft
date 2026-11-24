@@ -51,9 +51,11 @@ export default function ProjectsPreviewSection() {
 
                 {/* Details */}
                 <div className="mt-4">
-                  <h3 className="text-base font-bold text-[#01163B] group-hover:text-[#1E56A0] transition-colors leading-snug">
-                    {item.title}
-                  </h3>
+                  <Link href={item.href} className="block group/link">
+                    <h3 className="text-base font-bold text-[#01163B] group-hover/link:text-[#1E56A0] transition-colors leading-snug">
+                      {item.title}
+                    </h3>
+                  </Link>
                   <p className="mt-2 text-xs text-gray-500 leading-relaxed">
                     {item.description}
                   </p>

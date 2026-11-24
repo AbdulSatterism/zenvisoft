@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { footerData, siteConfig } from "@/data/content";
 
 export default function Footer() {
@@ -11,6 +12,23 @@ export default function Footer() {
   return (
     <footer className="bg-[#EBEBEE] text-[#01163B] pt-16 pb-12 overflow-hidden border-t border-gray-200">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
+        {/* Footer Top Header with Brand Logo */}
+        <div className="mb-12 flex items-center justify-between border-b border-gray-300/60 pb-8">
+          <Link href="/" className="inline-block group" aria-label="Zenvisoft Home">
+            <Image
+              src={siteConfig.logo}
+              alt={siteConfig.name}
+              width={195}
+              height={51}
+              unoptimized
+              className="h-10 sm:h-11 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]"
+            />
+          </Link>
+          <span className="text-xs font-semibold tracking-wider text-gray-500 uppercase hidden sm:inline-block">
+            Software Company
+          </span>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start">
           {/* Col 1: Skills / Services */}
           <div className="md:col-span-4">

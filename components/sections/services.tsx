@@ -40,9 +40,11 @@ export default function ServicesSection() {
                 {/* Right Details */}
                 <div className="flex-1 w-full flex flex-col justify-between py-1">
                   <div>
-                    <h3 className="text-base font-bold text-[#01163B] group-hover:text-[#1E56A0] transition-colors">
-                      {item.title}
-                    </h3>
+                    <Link href={`/services/${item.id}`} className="block group/link">
+                      <h3 className="text-base font-bold text-[#01163B] group-hover/link:text-[#1E56A0] transition-colors">
+                        {item.title}
+                      </h3>
+                    </Link>
                     <p className="mt-1.5 text-xs text-gray-500 leading-relaxed">
                       {item.description}
                     </p>
@@ -62,7 +64,7 @@ export default function ServicesSection() {
                     </div>
 
                     <Link
-                      href="/contact"
+                      href={`/services/${item.id}`}
                       className="rounded-full bg-white border border-gray-200 px-3.5 py-1 text-[11px] font-semibold text-gray-700 hover:border-[#01163B] hover:text-[#01163B] transition-colors shrink-0 ml-2"
                     >
                       See details

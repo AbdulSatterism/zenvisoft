@@ -14,14 +14,15 @@ export default function Navbar() {
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100">
       <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-6 lg:px-12">
         {/* Brand Logo */}
-        <Link href="/" className="flex items-center">
+        <Link href="/" className="flex items-center group py-1" aria-label="Zenvisoft Home">
           <Image
             src={siteConfig.logo}
             alt={siteConfig.name}
-            width={160}
-            height={40}
-            className="h-10 w-auto object-contain"
+            width={195}
+            height={51}
             priority
+            unoptimized
+            className="h-10 sm:h-11 md:h-12 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]"
           />
         </Link>
 
@@ -36,11 +37,10 @@ export default function Navbar() {
               <Link
                 key={link.label}
                 href={link.href}
-                className={`text-[15px] font-medium transition-colors ${
-                  isActive
-                    ? "text-[#01163B] font-bold"
-                    : "text-gray-600 hover:text-[#01163B]"
-                }`}
+                className={`text-[15px] font-medium transition-colors ${isActive
+                  ? "text-[#01163B] font-bold"
+                  : "text-gray-600 hover:text-[#01163B]"
+                  }`}
               >
                 {link.label}
               </Link>
